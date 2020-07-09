@@ -45,7 +45,7 @@ var questions = [{
         option1: "displays discreetly to the debugger",
         option2: "displays a pop-up message to the user",
         option3: "calls 911",
-        answer: "13"
+        answer: "1"
     }, 
     {
         question: "8. What is the method for converting a string to lowercase letters?",
@@ -74,10 +74,10 @@ var questions = [{
     var score = 0;
     var timeRemaining = 0;
     var timer;
-    
+     
     //Start countdown once user clicks 'start'   
     function start() {
-
+        //console.log("clicked!")
         timeRemaining = 300;
         document.getElementById("timeRemaining").innerHTML = timeRemaining;
 
