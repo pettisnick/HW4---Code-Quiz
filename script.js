@@ -84,6 +84,7 @@ var questions = [{
         timer = setInterval(function() {
             timeRemaining--;
             document.getElementById("timeRemaining").innerHTML = timeRemaining;
+            //Proceed to the end game function when timer hits 0
             if (timeRemaining <= 0) {
                 clearInterval(timer);
                 endGame();
@@ -92,16 +93,112 @@ var questions = [{
 
         next();
     }
-    
-    for (var i = 0; i <questions.length; i++) {
-        var response = window.prompt(questions[i].prompt);
-        if (response === questions[i].answer) {
-            score++;
-            alert("Correct!");
-        } else {
-            alert("Wrong!!");
-            }
+
+    //Stop timer to end game
+    function endGame() {
+        clearInterval(timer);
+
+        var quizContent = `
+        <h2>Game Over!</h2>
+        <h3>You got a ' + score + / 10 + ' questions correct!</h3>
+        <input type="text" id="name" placeholder="First name">
+        <button onclick="setScore()">Set score!</button>`;
+
+        document.getElementById("quizBody").innerHTML =quizContent;
+    }
+
+    //Store scores on local storage
+    function setScore() {
+        localStorage.setItem("highscore", score);
+        localStorage.setItem("highscoreName", document.getElementById('name').value);
+        getScore();
+    }
+
+    function  getScore() {
+        var quizContent = `
+        <h2>` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
+        <h1>` + localStorage.getItem("highscore") + `</h1><br>
+
+        <button onclick="cleaerScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>
+
+        `;
+
+        document.getElementById("quizBody").innerHTML = quizContent;
+            
+    }
+
+    //Clears the score name and value in the local storage if user selects to "clear score"
+    function clearScore() {
+        localStorage.setItem("highscore", "");
+        localStorage.setItem("highscoreName", "");
+
+        resetGame();
+        
+    }
+
+    //Reset game
+    function resetGame() {
+        clearInterval(timer);
+        score = 0;
+        curQuestion = -1;
+        timeRemaining = 0;
+        timer = null;
+
+        document.getElementById("timeRemaining").innerHTML = timeRemaining;
+
+        var quizContent = `
+        <h1>
+        JavaScript Quiz!
+        </h1>
+        <h3>
+        Click to Play!
+        </h3>
+        <button onclick="start()">Start!</button>`;
+
+        document.getElementById("quizBody").innerHTML = quizContent;
+                
+    }
+
+    //Deduct 15 seconds from time if user chooses wrong answer
+    function incorrect() {
+        timeRemaining -= 15;
+        next();
+        
+    }
+
+    //Increases score by 10 points if correct answer is choosen
+    function corrrect() {
+        score += 10;
+        next();
+        
+    }
+
+    //For loop through questions
+    function next() {
+        curQuestion++;
+
+        if (curQuestion > questions.length - 1) {
+            endGame();
+            return;
         }
-        alert("You got " + score + "/" + questions.length);
+
+        var quizContent = "<h2>" + questions[curQuestion].title + "</h2>"
+
+        for (var buttonLoop = 0; buttonLoop < questions[curQuestion].choices.length; buttonLoop++) {
+            var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>";
+            buttonCode = buttonCode.replace("[CHOICE]", questions[curQuestion].choices[buttonLoop]);
+            if (questions[curQuestion].choices[buttonLoop] == questions[curQuestion].answer) {
+                buttonCode = buttonCode.replace("[ANS]", "correct()");
+            }
+            else {
+                buttonCode = buttonCode.replace("[ANS]", "incorrect()");
+            }
+            quizContent += buttonCode
+        }
+
+        document.getElementById("quizBody").innerHTML = quizContent;  
+    }
+    
+    
 
     
