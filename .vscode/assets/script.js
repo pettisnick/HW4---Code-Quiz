@@ -80,7 +80,7 @@ var questions = [{
 
         var quizContent = `
         <h2>Game Over!</h2>
-        <h3>You got a ' + score + / 10 + ' questions correct!</h3>
+        <h3>"You got a ' + score + / 10 + ' questions correct!"</h3>
         <input type="text" id="name" placeholder="First name">
         <button onclick="setScore()">Set score!</button>`;
 
@@ -162,7 +162,7 @@ var questions = [{
             return;
         }
 
-        var quizContent = "<h2>" + questions[curQuestion].title + "</h2>"
+        var quizContent = "<h2>" + questions[curQuestion].question + "</h2>"
 
         for (var buttonLoop = 0; buttonLoop < questions[curQuestion].choices.length; buttonLoop++) {
             var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>";
