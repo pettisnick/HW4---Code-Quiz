@@ -34,6 +34,8 @@ The following is a screenshot of my Code Quiz application:
 
 ![Code_Quiz](https://user-images.githubusercontent.com/65740432/93515981-6ac30e00-f8f7-11ea-93ee-102c388b2699.png)
 
+![Question Example](https://user-images.githubusercontent.com/65740432/93516983-ce9a0680-f8f8-11ea-9003-e2b885646433.PNG)
+
 
 
 
