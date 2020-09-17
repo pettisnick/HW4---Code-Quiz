@@ -30,9 +30,11 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
+The following is a screenshot of my Code Quiz application:
 
-![code quiz](assets\img\04-web-apis-homework-demo.gif)
+![Code_Quiz](https://user-images.githubusercontent.com/65740432/93515981-6ac30e00-f8f7-11ea-93ee-102c388b2699.png)
+
+
 
 
 ### Review
